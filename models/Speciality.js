@@ -8,9 +8,10 @@ const Speciality = sequelize.define(
             primaryKey: true,
             autoIncrement: true,
         },
-        filed_name: {
+        field_name: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true
         },
     }, {
         timestamps: false,

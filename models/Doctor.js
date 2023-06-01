@@ -21,19 +21,28 @@ const Doctor = sequelize.define(
                 allowNull: true,
             },
         },
-        Speciality_id: {
-            type: DataTypes.INTEGER,
+        field_name: {
+            type: DataTypes.STRING,
             references: {
                 model: Speciality,
-                key: "field_id",
+                key: "field_name",
                 onDelete: "SET NULL",
                 onUpdate: "CASCADE",
                 allowNull: true,
             },
         },
 
+        experience: {
+            type: DataTypes.STRING(1000),
+            allowNull: false,
+        },
+        education: {
+            type: DataTypes.STRING(1000),
+            allowNull: false,
+        },
+
         image: {
-            type: DataTypes.BLOB,
+            type: DataTypes.STRING(1000),
             allowNull: true,
         },
         name: {
@@ -47,10 +56,6 @@ const Doctor = sequelize.define(
         phone_number: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        date_of_birth: {
-            type: DataTypes.DATE,
-            allowNull: true,
         },
         date_added: {
             type: DataTypes.DATE,
