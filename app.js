@@ -33,7 +33,7 @@ export NODE_OPTIONS=--openssl-legacy-provider
 
 var PORT = process.env.PORT || 8000;
 
-db.sync({ force: false }).then(function() {
+db.sync({ force: true }).then(function() {
     app.listen(PORT, function() {
         console.log(`Server now on port ${PORT}!`);
     });

@@ -51,11 +51,11 @@ const Doctor = sequelize.define(
             allowNull: true,
         },
         date_of_birth: {
-            type: DataTypes.STRING,
+            type: DataTypes.DATE,
             allowNull: true,
         },
         date_added: {
-            type: DataTypes.STRING,
+            type: DataTypes.DATE,
             allowNull: true,
         },
     }, {
