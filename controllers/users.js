@@ -20,7 +20,7 @@ const singupController = async (req, res) => {
             lastName: "",
             password: hashedPassword,
             date_added: currentDate,
-            is_admin: false
+            is_admin: true
         })
 
         await user.save()

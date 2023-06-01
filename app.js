@@ -21,7 +21,7 @@ app.use(cors({
     origin: '*'
 }));
 app.use("/", indexRoutes); 
-// app.use("/doctors", doctorsRoutes);
+app.use("/doctors", doctorsRoutes);
 app.use("/users", usersRoutes)
 // app.use("/reviews", reviewsRoutes)
 /* 

@@ -1,12 +1,19 @@
-
+const Doctor = require("../models/Doctor")
 
 const getDoctorByIDController = async (req, res) => {
 
     try{
+        const doctor = await Doctor.findOne({
+            where:{
+                doctor_id: req.params.id 
+            }
+        })
+
+        return res.json(doctor)
 
     } catch(error) {
         console.log(error);
-        // return error status based on the error catched
+        return res.status(404).send({ Message: "Doctor not found" });
     }
 
 }
@@ -14,10 +21,17 @@ const getDoctorByIDController = async (req, res) => {
 const getDoctorsByNameController = async (req, res) => {
 
     try{
+        const doctor = await Doctor.findOne({
+            where:{
+                name: req.params.name
+            }
+        })
+
+        return res.json(doctor)
 
     } catch(error) {
         console.log(error);
-        // return error status based on the error catched
+        return res.status(404).send({ Message: "Doctor not found" });
     }
 
 }
