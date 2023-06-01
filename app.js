@@ -21,9 +21,9 @@ app.use(cors({
     origin: '*'
 }));
 app.use("/", indexRoutes); 
-app.use("/doctors", doctorsRoutes);
+// app.use("/doctors", doctorsRoutes);
 app.use("/users", usersRoutes)
-app.use("/reviews", reviewsRoutes)
+// app.use("/reviews", reviewsRoutes)
 /* 
 if you faced any issues run this command in your terminal before running the app:
 
@@ -33,7 +33,7 @@ export NODE_OPTIONS=--openssl-legacy-provider
 
 var PORT = process.env.PORT || 8000;
 
-db.sync({ force: true }).then(function() {
+db.sync({ force: false }).then(function() {
     app.listen(PORT, function() {
         console.log(`Server now on port ${PORT}!`);
     });
