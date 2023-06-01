@@ -30,6 +30,9 @@ function verifyUserMiddleware(req, res, next) {
         if (err) {
             res.sendStatus(403);
         } else {
+            req.is_admin = data.user_to_enc.is_admin
+            req.userId = data.user_to_enc.userId
+            req.user_email = data.user_to_enc.email
             next();
         }
     })
