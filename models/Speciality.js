@@ -5,8 +5,6 @@ const Speciality = sequelize.define(
     "Speciality", {
         field_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            unique: true,
             primaryKey: true,
             autoIncrement: true,
         },

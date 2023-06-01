@@ -4,11 +4,9 @@ const sequelize = require("../utils/db.config");
 const Clinic = sequelize.define(
     "Clinic", {
         clinic_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            unique: true,
+            type: DataTypes.STRING,
             primaryKey: true,
-            autoIncrement: true,
+            allowNull: false,
         },
         name: {
             type: DataTypes.STRING,
@@ -20,8 +18,13 @@ const Clinic = sequelize.define(
         },
         website: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
         },
+
+        clinic_address: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        }
     }, {
         timestamps: false,
     }

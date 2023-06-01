@@ -7,14 +7,12 @@ const Doctor = sequelize.define(
     "Doctor", {
         doctor_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            unique: true,
             primaryKey: true,
             autoIncrement: true,
         },
 
         clinic_id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             references: {
                 model: Clinic,
                 key: "clinic_id",
@@ -40,15 +38,15 @@ const Doctor = sequelize.define(
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
         },
         phone_number: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
         },
         date_of_birth: {
             type: DataTypes.DATE,
@@ -56,7 +54,7 @@ const Doctor = sequelize.define(
         },
         date_added: {
             type: DataTypes.DATE,
-            allowNull: true,
+            allowNull: false,
         },
     }, {
         timestamps: false,

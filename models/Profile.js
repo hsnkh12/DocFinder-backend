@@ -5,15 +5,17 @@ const sequelize = require("../utils/db.config");
 const Profile = sequelize.define(
     "Profile", {
 
-
-
-        experience: {
+        image: {
             type: DataTypes.BLOB,
-            allowNull: true,
+            allowNull: true
         },
-        edutaction: {
+        experience: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
+        },
+        eduction: {
+            type: DataTypes.STRING,
+            allowNull: false,
         }
     }, {
         timestamps: false,

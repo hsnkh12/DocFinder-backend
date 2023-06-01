@@ -7,8 +7,6 @@ const Review = sequelize.define("Review", {
     review_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        unique: true,
-        allowNull: false,
         autoIncrement: true,
     },
     doctor_id: {
@@ -22,7 +20,7 @@ const Review = sequelize.define("Review", {
         },
     },
     user_id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         references: {
             model: User,
             key: "userId",
@@ -40,7 +38,7 @@ const Review = sequelize.define("Review", {
         allowNull: true,
     },
     date_added: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
         allowNull: false,
     },
 
