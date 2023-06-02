@@ -9,6 +9,7 @@ const {indexRoutes} = require("./routes/index")
 const {doctorsRoutes} = require("./routes/doctors")
 const {usersRoutes} = require("./routes/users")
 const {reviewsRoutes} = require("./routes/reviews")
+const celery = require("./utils/celery.config")
 
 fs.readdirSync(modelsFolder)
     .forEach(file => {
@@ -33,7 +34,10 @@ export NODE_OPTIONS=--openssl-legacy-provider
 
 var PORT = process.env.PORT || 8000;
 
-db.sync({ force: false }).then(function() {
+db.sync({ force: false })
+.then( celery.init() )
+.then(function() {
+
     app.listen(PORT, function() {
         console.log(`Server now on port ${PORT}!`);
     });
