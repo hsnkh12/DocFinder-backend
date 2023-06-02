@@ -12,7 +12,17 @@ const getDoctorByIDController = async (req, res) => {
             }
         })
 
-        return res.json(doctor)
+        const lastReview = await Review.findAll({
+            limit: 1,
+            where: {
+                doctor_id: doctor.doctor_id
+            },
+            order: [["date_added","DESC"]]
+        })
+
+        const result = {...doctor.dataValues, lastReview}
+
+        return res.json(result)
 
     } catch(error) {
         console.log(error);
@@ -32,7 +42,17 @@ const getDoctorsByNameController = async (req, res) => {
             }
         })
 
-        return res.json(doctor)
+        const lastReview = await Review.findAll({
+            limit: 1,
+            where: {
+                doctor_id: doctor.doctor_id
+            },
+            order: [["date_added","DESC"]]
+        })
+
+        const result = {...doctor.dataValues, lastReview}
+
+        return res.json(result)
 
     } catch(error) {
         console.log(error);
@@ -47,6 +67,7 @@ const filterDoctorsController = async (req, res) => {
 
         const body = req.body 
         
+        // Find all doctors with specified field name and clinic
         const doctors = await Doctor.findAll({
             where: { 
                 field_name : {[Sequelize.Op.regexp]: body.field_name},
@@ -54,8 +75,10 @@ const filterDoctorsController = async (req, res) => {
             },
         })
 
+        // Add average review rate to every object of the doctor
         const result = await Promise.all(doctors.map( async (doctor) => {
 
+            // Aggregate rating average for each doctor
             const avgReviews = await Review.findAll({
                 attributes: [[Sequelize.fn('avg', Sequelize.col('rate')),'rating']],
                 where: { doctor_id: doctor.doctor_id},
@@ -105,6 +128,7 @@ const scrapNewDoctorsController = async(req, res) => {
             return res.status(401).send({ Message: "Not authorized" });
         }
 
+        // Send a request to the scraper to scrap doctor with specified field name and clinic
         await delayQueuedTask(body.field_name,body.clinic_id)
         return res.json(true)
 
