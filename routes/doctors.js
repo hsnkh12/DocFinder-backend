@@ -22,8 +22,6 @@ router.post("/scrap",
 )
 
 router.get("/:id/reviews", 
-    verifyTokenMiddleware, 
-    verifyUserMiddleware,
     reviews.getDoctorReviewsController
 )
 
