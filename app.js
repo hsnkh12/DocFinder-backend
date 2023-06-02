@@ -24,7 +24,7 @@ app.use(cors({
 app.use("/", indexRoutes); 
 app.use("/doctors", doctorsRoutes);
 app.use("/users", usersRoutes)
-// app.use("/reviews", reviewsRoutes)
+app.use("/reviews", reviewsRoutes)
 /* 
 if you faced any issues run this command in your terminal before running the app:
 
