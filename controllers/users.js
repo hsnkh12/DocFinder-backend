@@ -15,6 +15,7 @@ const singupController = async (req, res) => {
         let hashedPassword = await PasswordManager.hashPassword(body.password)
 
         let user = await User.create({
+            username: body.username,
             email: body.email,
             firstName: "",
             lastName: "",
@@ -31,16 +32,17 @@ const singupController = async (req, res) => {
         // Create jwt token and return it
         jwt.sign({user_to_enc}, JWT_SECRET_KEY, {expiresIn: '60m'}, (err, token)=>{
             return res.json({
-                token
+                token,
+                is_admin: user.is_admin
             });
         })
 
     } catch(error) {
 
-        console.log(error.name);
+        console.log(error);
 
         if (error.name == "SequelizeUniqueConstraintError"){
-            return res.status(409).send({'Message':'User with this email already exists'});
+            return res.status(409).send({'Message':'User with this email/username already exists'});
         }
 
         return res.status(401).send({ Message: "Invalid credentials" });

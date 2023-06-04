@@ -5,9 +5,10 @@ const reviews = require("../controllers/reviews")
 const {verifyTokenMiddleware, verifyUserMiddleware} = require("../middlewares/auth")
 
 
+router.get("/name/:name", controllers.getDoctorsByNameController)
 router.get("/", controllers.filterDoctorsController)
 router.get("/:id", controllers.getDoctorByIDController)
-router.get("/name/:name", controllers.getDoctorsByNameController)
+
 
 router.delete("/:id",
     verifyTokenMiddleware, 

@@ -20,7 +20,12 @@ const getDoctorByIDController = async (req, res) => {
             order: [["date_added","DESC"]]
         })
 
-        const result = {...doctor.dataValues, lastReview}
+        const avgReviews = await Review.findAll({
+            attributes: [[Sequelize.fn('avg', Sequelize.col('rate')),'rating']],
+            where: { doctor_id: doctor.doctor_id},
+        })
+
+        const result = {...doctor.dataValues, lastReview, avgReviews}
 
         return res.json(result)
 
@@ -66,12 +71,12 @@ const filterDoctorsController = async (req, res) => {
     try{
 
         const body = req.body 
-        
+
         // Find all doctors with specified field name and clinic
         const doctors = await Doctor.findAll({
             where: { 
-                field_name : {[Sequelize.Op.regexp]: body.field_name},
-                clinic_id : {[Sequelize.Op.regexp]: ".*"}
+                field_name : {[Sequelize.Op.regexp]: req.query.field_name},
+                clinic_id : {[Sequelize.Op.regexp]: req.query.clinic_id}
             },
         })
 

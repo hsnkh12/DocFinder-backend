@@ -1,6 +1,6 @@
 
 
-INSERT INTO Users(email, password, date_added, is_admin) VALUES ('admin@admin.com','$2b$06$jDBkQ5r45V072CLcQ6LbAOtRI3pM2jqnmRkyIytWSp9J8mU0qwHXm', '2023-06-01T19:45:29.000Z', true);
+INSERT INTO Users(username,email, password, date_added, is_admin) VALUES ('admin','admin@admin.com','$2b$06$jDBkQ5r45V072CLcQ6LbAOtRI3pM2jqnmRkyIytWSp9J8mU0qwHXm', '2023-06-01T19:45:29.000Z', true);
 INSERT INTO Clinics(clinic_id,name,email,website,clinic_address) VALUES ('CCH', 'Cyprus Central Hospital', 'info@cypruscentralhospital.com', 'https://cypruscentralhospital.com', 'Esref Bitlis Cad. Narlik Street, Famagusta');
 
 
