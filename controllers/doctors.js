@@ -2,6 +2,8 @@ const Doctor = require("../models/Doctor")
 const Sequelize = require("sequelize")
 const Review = require("../models/review")
 const {delayQueuedTask} = require("../utils/task")
+const User = require("../models/User")
+
 
 const getDoctorByIDController = async (req, res) => {
 
@@ -20,13 +22,31 @@ const getDoctorByIDController = async (req, res) => {
             order: [["date_added","DESC"]]
         })
 
+
+
         const avgReviews = await Review.findAll({
             attributes: [[Sequelize.fn('avg', Sequelize.col('rate')),'rating']],
             where: { doctor_id: doctor.doctor_id},
         })
 
-        const result = {...doctor.dataValues, lastReview, avgReviews}
 
+        if (lastReview.length == 0){
+
+            const result = {...doctor.dataValues, lastReview, avgReviews}
+            return res.json(result)
+        }
+
+        const user = await User.findOne({
+            where: {
+                userId: lastReview[0].user_id
+            },
+            attributes: ['username']
+        })
+
+        const reviewResult = {...lastReview[0].dataValues, user}
+
+        
+        const result = {...doctor.dataValues, reviewResult, avgReviews}
         return res.json(result)
 
     } catch(error) {
@@ -46,18 +66,7 @@ const getDoctorsByNameController = async (req, res) => {
                 }
             }
         })
-
-        const lastReview = await Review.findAll({
-            limit: 1,
-            where: {
-                doctor_id: doctor.doctor_id
-            },
-            order: [["date_added","DESC"]]
-        })
-
-        const result = {...doctor.dataValues, lastReview}
-
-        return res.json(result)
+        return res.json(doctor)
 
     } catch(error) {
         console.log(error);
@@ -107,6 +116,12 @@ const deleteDoctorController = async (req, res) => {
         if(!req.is_admin){
             return res.status(401).send({ Message: "Not authorized" });
         }
+
+        await Review.destroy({
+            where: {
+                doctor_id: req.params.id
+            }
+        })
 
         await Doctor.destroy({
             where:{

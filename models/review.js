@@ -14,9 +14,7 @@ const Review = sequelize.define("Review", {
         references: {
             model: Doctor,
             key: "doctor_id",
-            onDelete: "SET NULL",
-            onUpdate: "CASCADE",
-            allowNull: true,
+            onDelete: "CASCADE",
         },
     },
     user_id: {
@@ -24,9 +22,7 @@ const Review = sequelize.define("Review", {
         references: {
             model: User,
             key: "userId",
-            onDelete: "SET NULL",
-            onUpdate: "CASCADE",
-            allowNull: true,
+            onDelete: "CASCADE",
         },
     },
     rate: {

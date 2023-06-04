@@ -11,9 +11,19 @@ const homeController = async (req, res) => {
 
 }
 
+const adminUserController = async (req, res) => {
+
+    try{
+        return res.json(true) 
+    } catch (error){
+        console.log(error)
+    }
+}
+
 
 
 module.exports = {
     homeController,
+    adminUserController
 }
 

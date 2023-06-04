@@ -1,4 +1,5 @@
 const Review = require("../models/review")
+const User = require("../models/User")
 
 const addReviewController = async (req, res) => {
 
@@ -89,7 +90,19 @@ const getDoctorReviewsController = async (req, res) => {
             }
         })
 
-        return res.json(reviews)
+        const result = await Promise.all(reviews.map( async review => {
+
+            const user = await User.findOne({
+                where: {
+                    userId: review.user_id
+                },
+                attributes: ['username']
+            })
+
+            return {...review.dataValues, user}
+        }))
+
+        return res.json(result)
 
     } catch(error) {
         console.log(error);

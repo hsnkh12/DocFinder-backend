@@ -39,8 +39,17 @@ function verifyUserMiddleware(req, res, next) {
 
 }
 
+function verifyAdminMiddleware(req, res, next) {
+
+    if(!req.is_admin){
+        res.sendStatus(403);
+    }
+    next()
+}
+
 
 module.exports = {
     verifyTokenMiddleware,
-    verifyUserMiddleware
+    verifyUserMiddleware,
+    verifyAdminMiddleware
 }

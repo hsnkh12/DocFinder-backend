@@ -23,8 +23,6 @@ router.put("/:id",
     controllers.updateReviewController
 )
 router.get("/:id", 
-    verifyTokenMiddleware, 
-    verifyUserMiddleware,
     controllers.getDoctorReviewsController
 )
 
