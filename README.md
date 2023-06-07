@@ -12,19 +12,19 @@ Installation
 - Clone the repository to your local machine:
 
 ```shell
-Copy code
-git clone <repository-url>
+
+git clone https://github.com/hsnkh12/cmse322-backend
 ```
 - Navigate to the project directory:
 
 ```shell
-Copy code
-cd <project-directory>
+
+cd cmse322_backend
 ```
 - Install the dependencies using either NPM or Yarn:
 
 ```shell
-Copy code
+
 # Using NPM
 npm install
 
@@ -44,7 +44,7 @@ Once the installation and configuration steps are completed, you can start the E
 
 ```
 shell
-Copy code
+
 # Using NPM
 npm start
 
@@ -59,7 +59,7 @@ To run the tests for the app, you can use the following command:
 
 ```
 shell
-Copy code
+
 # Using NPM
 npm test
 
